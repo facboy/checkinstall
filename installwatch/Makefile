@@ -11,7 +11,23 @@ PREFIX=/usr/local
 VERSION=0.7.0beta7
 
 BINDIR=$(PREFIX)/bin
-LIBDIR=$(PREFIX)/lib
+# determine LIBDIR consistently with installwatch script
+uname_M := $(shell uname -m)
+ifeq ($(uname_M),x86_64)
+    LIB64_PLATFORM=true
+else ifeq ($(uname_M),x86_64)
+    LIB64_PLATFORM=true
+else ifeq ($(uname_M),x86_64)
+    LIB64_PLATFORM=true
+endif
+ifneq ("$(wildcard $(PREFIX)/lib64)","")
+ifdef LIB64_PLATFORM
+    LIBDIR=$(PREFIX)/lib64
+endif
+endif
+ifndef LIBDIR
+    LIBDIR=$(PREFIX)/lib
+endif
 
 all: installwatch.so
 
