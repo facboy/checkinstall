@@ -1378,7 +1378,7 @@ fi
          MAINTDOMAIN=$HOSTNAME
       else
          hostname -f &> /dev/null
-         if [ $? -gt 0]; then
+         if [ $? -gt 0 ]; then
             MAINTDOMAIN="localhost"
          else
             MAINTDOMAIN=`hostname -f`
